@@ -1,0 +1,184 @@
+#!/usr/bin/env python3
+"""
+Weekly Wrap - Generates a weekly summary report
+Combines all daily data into a weekly view
+"""
+
+import json
+import os
+from datetime import datetime, timedelta
+
+def load_json(path, default=None):
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except:
+        return default or {}
+
+def generate_wrap():
+    print("=" * 60)
+    print("📅 WEEKLY WRAP - Week Summary")
+    print(f"   Generated: {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}")
+    print("=" * 60)
+    
+    # Load current snapshots
+    mood = load_json('/output/internet_mood.json', {})
+    echo = load_json('/output/echo_chamber_analysis.json', {})
+    crypto = load_json('/output/crypto_alerter.json', {})
+    trending = load_json('/output/trending_crossplatform.json', {})
+    tech_radar = load_json('/output/tech_radar.json', {})
+    hn_digest = load_json('/output/hn_digest.json', {})
+    weather = load_json('/output/universal_data.json', {}).get('sources', {}).get('weather', {})
+    
+    # Count total files generated
+    output_dir = '/output'
+    total_files = len([f for f in os.listdir(output_dir) if f.endswith(('.json', '.md'))])
+    
+    print("\n" + "━" * 40)
+    print("📊 KEY METRICS")
+    print("━" * 40)
+    
+    print(f"\n   🌡️  Internet Mood: {mood.get('overall_mood', '?')}/100 ({mood.get('overall_label', 'neutral')})")
+    print(f"   🔊 Echo Score: {echo.get('echo_score', '?')}/100 ({echo.get('echo_label', 'unknown')})")
+    
+    if crypto and crypto.get('coins'):
+        btc = crypto['coins'][0]
+        print(f"   💰 BTC Price: ${btc.get('price', 0):,.0f}")
+        print(f"   📈 BTC Dominance: {crypto.get('btc_dominance', '?')}%")
+    
+    if weather:
+        print(f"   🌤️  NYC Weather: {weather.get('condition', '?')}, {weather.get('temp_F', '?')}°F")
+    
+    print(f"   📁 Files Generated: {total_files}")
+    
+    print("\n" + "━" * 40)
+    print("🔥 TRENDING TOPICS")
+    print("━" * 40)
+    
+    if trending:
+        topics = trending.get('topics', {})
+        sorted_topics = sorted(topics.items(), key=lambda x: x[1], reverse=True)
+        for topic, count in sorted_topics[:5]:
+            print(f"   • {topic}: {count} mentions")
+    
+    print("\n" + "━" * 40)
+    print("🛸 TECH RADAR STATUS")
+    print("━" * 40)
+    
+    if tech_radar:
+        zones = tech_radar.get('zones', [])
+        for zone in zones:
+            cat = zone.get('category', '?')
+            status = zone.get('status', '?')
+            icon = "🔴" if status == "ADOPT" else ("🟡" if status == "TRIAL" else "⚪")
+            print(f"   {icon} {cat}: {status}")
+    
+    print("\n" + "━" * 40)
+    print("📰 HN TOP STORY")
+    print("━" * 40)
+    
+    if hn_digest and hn_digest.get('stories'):
+        top = hn_digest['stories'][0]
+        print(f"\n   \"{top.get('title', 'N/A')[:60]}...\"")
+        print(f"   📈 {top.get('score', '?')} pts | 💬 {top.get('comments', '?')} comments")
+    
+    print("\n" + "=" * 60)
+    print("💡 INSIGHTS")
+    print("=" * 60)
+    
+    insights = []
+    
+    if mood and mood.get('overall_mood', 50) < 50:
+        insights.append("📉 Internet mood is slightly negative - conflict news dominates")
+    
+    if echo and echo.get('echo_score', 0) > 60:
+        insights.append("🔊 High echo chamber score - feeds are overlapping heavily")
+    
+    if trending:
+        topics = trending.get('topics', {})
+        if 'AI/ML' in topics and topics['AI/ML'] > 5:
+            insights.append("🤖 AI/ML is the dominant topic across platforms")
+    
+    for insight in insights:
+        print(f"\n   {insight}")
+    
+    if not insights:
+        print("\n   (No major insights this week)")
+    
+    print("\n" + "=" * 60)
+    print("📦 TOOLS BUILT")
+    print("=" * 60)
+    
+    scripts_count = len([f for f in os.listdir('/scripts') if f.endswith('.py') and not f.startswith('push') and not f.startswith('check')])
+    print(f"\n   Total scripts: {scripts_count}")
+    print(f"   GitHub repo: arlovalderruten/arlo-explorer")
+    print(f"   All tools available at: https://github.com/arlovalderruten/arlo-explorer")
+    
+    # Generate markdown report
+    md = f"""# 📅 Weekly Wrap - {datetime.now().strftime('%Y-%m-%d')}
+
+## Generated: {datetime.now().isoformat()}
+
+## Key Metrics
+
+| Metric | Value |
+|--------|-------|
+| Internet Mood | {mood.get('overall_mood', '?')}/100 |
+| Echo Score | {echo.get('echo_score', '?')}/100 |
+| BTC Price | ${crypto.get('coins', [{}])[0].get('price', '?') if crypto else '?'} |
+| Files Generated | {total_files} |
+| Scripts Built | {scripts_count} |
+
+## Trending Topics
+
+"""
+    if trending:
+        for topic, count in sorted(topics.items(), key=lambda x: x[1], reverse=True)[:5]:
+            md += f"- **{topic}**: {count} mentions\n"
+    
+    md += f"""
+## Top HN Story
+
+> {hn_digest.get('stories', [{}])[0].get('title', 'N/A') if hn_digest else 'N/A'}
+
+## Insights
+
+"""
+    for insight in insights:
+        md += f"- {insight}\n"
+    
+    md += f"""
+---
+
+*Generated by Arlo's exploration tools*
+"""
+    
+    with open('/output/weekly_wrap.md', 'w') as f:
+        f.write(md)
+    
+    # Save JSON
+    result = {
+        'timestamp': datetime.now().isoformat(),
+        'metrics': {
+            'internet_mood': mood.get('overall_mood'),
+            'echo_score': echo.get('echo_score'),
+            'btc_price': crypto.get('coins', [{}])[0].get('price') if crypto else None,
+            'files_generated': total_files,
+            'scripts_built': scripts_count
+        },
+        'insights': insights
+    }
+    
+    with open('/output/weekly_wrap.json', 'w') as f:
+        json.dump(result, f, indent=2)
+    
+    print("\n" + "=" * 60)
+    print("✅ Weekly wrap complete!")
+    print("   📄 /output/weekly_wrap.md")
+    print("   📄 /output/weekly_wrap.json")
+    print("=" * 60)
+    
+    return result
+
+if __name__ == "__main__":
+    generate_wrap()
