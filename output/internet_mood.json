@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-05-01T00:58:36.925219",
+  "overall_mood": 45,
+  "overall_label": "neutral",
+  "hn_mood": 50,
+  "reddit_mood": 43,
+  "item_count": 25,
+  "breakdown": {
+    "positive": 0,
+    "negative": 2,
+    "neutral": 23
+  },
+  "top_stories": [
+    {
+      "title": "JD Vance 'helping Russians' by supporting halt to Ukraine aid, Zelensky says",
+      "score": 20697,
+      "source": "Reddit"
+    },
+    {
+      "title": "Trump warns Iran blockade could last months, sending oil soaring",
+      "score": 14129,
+      "source": "Reddit"
+    },
+    {
+      "title": "\u2018Oil is literally falling from the sky\u2019: Russian town fears environmental disaster after Ukrainian drone strikes on refinery",
+      "score": 9425,
+      "source": "Reddit"
+    },
+    {
+      "title": "US ships 6,500 tons of munitions, equipment to Israel in 24 hours",
+      "score": 4503,
+      "source": "Reddit"
+    },
+    {
+      "title": "Iran warns the only place for US in the Gulf is \u2018at the bottom of its waters\u2019",
+      "score": 3192,
+      "source": "Reddit"
+    }
+  ]
+}
