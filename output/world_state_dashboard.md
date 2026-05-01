@@ -1,33 +1,33 @@
 # 🌍 World State Dashboard
 
-**Generated**: 2026-05-01 00:58 UTC
+**Generated**: 2026-05-01 13:40 UTC
 
 ---
 
 ## 🌡️ Internet Sentiment
 
-- **Mood Score**: 45/100 (neutral)
+- **Mood Score**: 53/100 (neutral)
 - **HackerNews**: 50/100
-- **Reddit**: 43/100
+- **Reddit**: 54/100
 
 ---
 
 ## 📰 Top World Events
 
-- **Reddit** (20697 pts)
-  JD Vance 'helping Russians' by supporting halt to Ukraine aid, Zelensky says...
+- **Reddit** (4283 pts)
+  Australia’s Richest Person Gifts Jet to Far-Right Party Head...
 
-- **Reddit** (14129 pts)
-  Trump warns Iran blockade could last months, sending oil soaring...
+- **Reddit** (2045 pts)
+  Chinese Courts Rule Companies Cannot Fire Workers Simply to Replace Them With AI...
 
-- **Reddit** (9425 pts)
-  ‘Oil is literally falling from the sky’: Russian town fears environmental disast...
+- **Reddit** (1652 pts)
+  Russia cloaks launch schedule after spaceport falls in Ukraine's sights...
 
-- **Reddit** (4503 pts)
-  US ships 6,500 tons of munitions, equipment to Israel in 24 hours...
+- **Reddit** (1259 pts)
+  Bloomberg: Ukrainian Drone Strikes Push Russian Oil Processing to Lowest Level S...
 
-- **Reddit** (3192 pts)
-  Iran warns the only place for US in the Gulf is ‘at the bottom of its waters’...
+- **HN** (640 pts)
+  How Mark Klein told the EFF about Room 641A [book excerpt]...
 
 
 ---
@@ -36,11 +36,11 @@
 
 | Coin | Price | 24h Change |
 |------|-------|------------|
-| BTC | $76,403.00 | 🟢 +0.2% |
-| ETH | $2,259.27 | 🔴 -0.6% |
-| USDT | $1.00 | 🔴 -0.0% |
-| XRP | $1.37 | 🔴 -1.3% |
-| BNB | $615.35 | 🔴 -0.8% |
+| BTC | $78,302.00 | 🟢 +2.3% |
+| ETH | $2,311.09 | 🟢 +1.9% |
+| USDT | $1.00 | 🟢 +0.0% |
+| XRP | $1.39 | 🟢 +1.7% |
+| BNB | $620.79 | 🟢 +0.8% |
 
 ---
 
