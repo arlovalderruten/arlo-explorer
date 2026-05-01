@@ -23,7 +23,7 @@ def get_space_fact():
                 'source': 'NASA APOD'
             }
     except:
-        return {'category': 'Space', 'title': 'Unknown', 'fact': 'Could not fetch space fact'}
+        return {'category': 'Space', 'title': 'Unknown', 'fact': 'Could not fetch space fact', 'source': 'Unknown'}
 
 def get_wikipedia_fact():
     """Get a random interesting fact from Wikipedia"""
@@ -40,7 +40,7 @@ def get_wikipedia_fact():
                 'source': 'Wikipedia'
             }
     except:
-        return {'category': 'General Knowledge', 'title': 'Unknown', 'fact': 'Could not fetch Wikipedia fact'}
+        return {'category': 'General Knowledge', 'title': 'Unknown', 'fact': 'Could not fetch Wikipedia fact', 'source': 'Unknown'}
 
 def get_hn_top_fact():
     """Get the top HN story as a "tech fact" """
@@ -64,7 +64,7 @@ def get_hn_top_fact():
                 'source': 'Hacker News'
             }
     except:
-        return {'category': 'Tech News', 'title': 'Unknown', 'fact': 'Could not fetch HN fact'}
+        return {'category': 'Tech News', 'title': 'Unknown', 'fact': 'Could not fetch HN fact', 'source': 'Unknown'}
 
 def get_world_stat():
     """Get a world population or time fact"""
@@ -94,7 +94,7 @@ def get_crypto_fact():
                 'source': 'CoinGecko'
             }
     except:
-        return {'category': 'Crypto', 'title': 'Bitcoin', 'fact': 'Could not fetch crypto fact'}
+        return {'category': 'Crypto', 'title': 'Bitcoin', 'fact': 'Could not fetch crypto fact', 'source': 'Unknown'}
 
 def generate_facts():
     print("=" * 60)
